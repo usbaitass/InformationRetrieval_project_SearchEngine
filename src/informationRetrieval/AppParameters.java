@@ -1,5 +1,7 @@
 package informationRetrieval;
 
+import java.util.HashMap;
+
 public final class AppParameters {
 	//Dictionary size limit in chars
 	public static final long DICTIONARY_SIZE_LIMIT = 250000;
@@ -18,4 +20,6 @@ public final class AppParameters {
 	//Probabilistic parameters
 	public static final double B_PARAMETER = 0.5;
 	public static final double K_PARAMETER = 0.5;
+	
+	public static HashMap<String, String> mapAFINN;
 }

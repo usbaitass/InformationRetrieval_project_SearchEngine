@@ -1,6 +1,5 @@
 package informationRetrieval;
 
-import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,11 +23,15 @@ public class Article {
 	private List<String> tokens;
 	private FilteringServices fs;
 	
+	private int sentimentValue;
+	
+	
 	//Article constructor
 	public Article(String text, String ID, FilteringServices fs) {
 		this.text = text;
 		this.ID = ID;
 		this.fs = fs;
+		
 		
 		//Call tokenization
 		this.tokens = textTokenize(text);
@@ -39,6 +42,7 @@ public class Article {
 		//ApplyFilters
 		applyFilters();
 		
+		this.sentimentValue = evaluateSentimentArticle();
 	}
 	
 	
@@ -192,5 +196,20 @@ public class Article {
 		double termFrequency = (double)instancesCount / (double)tokens.size();
 		//System.out.println("Term " + term + " found in article " + this.getID() + " with frequency " + termFrequency);
 		return termFrequency;
+	}
+	
+	public int evaluateSentimentArticle(){
+		int sum = 0;
+		for(int i=0; i<tokens.size(); i++){
+			if (AppParameters.mapAFINN.containsKey(tokens.get(i))) {
+				//System.out.println("HERE: "+tokens.get(i)+" "+AppParameters.mapAFINN.get(tokens.get(i)));
+				sum += Integer.parseInt(AppParameters.mapAFINN.get(tokens.get(i)));
+			}
+		}
+		return sum;
+	}
+	
+	public int getSentimentValue(){
+		return sentimentValue;
 	}
 }

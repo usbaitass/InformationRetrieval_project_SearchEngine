@@ -9,6 +9,7 @@ import org.apache.commons.io.LineIterator;
 public class QueryHandler {
 	File dictionary;
 	FilteringServices fs;
+	int querySentiment = 0;
 	
 	
 	public QueryHandler() throws IOException {
@@ -34,7 +35,7 @@ public class QueryHandler {
 		ArrayList<String> pageids = new ArrayList<String>();
 		String[] lineSplit = line.split(";");
 		
-		for(int i=1; i < lineSplit.length; i++) {
+		for(int i=2; i < lineSplit.length; i++) {//changed here from i=1 to i=2
 			pageids.add(lineSplit[i]);
 		}
 		return pageids;
@@ -86,6 +87,7 @@ public class QueryHandler {
 				currentResults = new ArrayList<String>();
 				currentResults.addAll(getPageIDsFromDictionaryLine(currentLine));
 				results.put(currentTerm, currentResults);
+				querySentiment += Integer.parseInt(currentLine.split(";")[1]);
 				
 				//If all terms are retrieved, end loop
 				matchCount++;

@@ -39,7 +39,7 @@ public class ProbabilisticEvaluation {
 	}
 
 
-	public double getDocumentScore(String[] queryTerms, String pageid) {
+	public String getDocumentScoreAndSentiment(String[] queryTerms, String pageid) {
 		Article currentArticle = articlesHashMap.get(pageid);
 		int currentArticleLength = currentArticle.getArticleLength();
 		double documentScore = 0;
@@ -59,8 +59,9 @@ public class ProbabilisticEvaluation {
 			double termScore = Math.log(firstValue * (secondValue / thirdValue));
 			documentScore += termScore;
 		}
+		System.out.println(pageid+" article's sentiment: "+currentArticle.getSentimentValue());
 		
-		return documentScore;
+		return documentScore+";"+currentArticle.getSentimentValue();
 	}
 
 
