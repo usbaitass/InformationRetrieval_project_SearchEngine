@@ -1,6 +1,7 @@
 package informationRetrieval;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -38,7 +39,7 @@ public class InformationRetrieval {
 	    for (int i = 0; i < listOfFiles.length; i++) {
 	      if (listOfFiles[i].isFile()) {
 	    	  if (listOfFiles[i].getName().split("\\.")[1].toLowerCase().equals("sgm")) {
-	    		  sgmFiles.add(listOfFiles[i].getPath());
+	    	    sgmFiles.add(listOfFiles[i].getPath());
 	    	  }
 	      }
 	    }
@@ -417,10 +418,35 @@ public class InformationRetrieval {
 		//Calling own class' constructor
 		try {
 			InformationRetrieval ir = new InformationRetrieval();
+			
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		loadAFINN();
 
 	}
+	
+//NEW CODE
+	public static void loadAFINN(){
+		
+		Scanner in;
+		try {
+			in = new Scanner(new File("AFINN/AFINN-111.txt"));
+			
+			while(in.hasNextLine()){
+				System.out.println(in.nextLine());
+			}
+			
+			in.close();			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception at reading AFINN file has occured!");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 }

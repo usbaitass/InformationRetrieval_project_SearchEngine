@@ -1,5 +1,6 @@
 package informationRetrieval;
 
+import java.io.File;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +38,7 @@ public class Article {
 		
 		//ApplyFilters
 		applyFilters();
+		
 	}
 	
 	
